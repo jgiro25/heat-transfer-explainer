@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heat Transfer — Conduction, Convection &amp; Radiation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"> ent</span>
+      <div>
+        <h1>Heat Transfer</h1>
+        <p class="tagline">How energy moves — conduction, convection &amp; radiation</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro glass">
+      <h2>What is heat transfer?</h2>
+      <p>
+        Heat is energy on the move. Whenever two places have different temperatures,
+        energy tends to flow from the warmer place toward the cooler one until they
+        even out. Scientists group that flow into three clear modes: <strong>conduction</strong>
+        (through touching matter), <strong>convection</strong> (by moving fluids), and
+        <strong>radiation</strong> (as waves through empty space). Explore each demo below —
+        drag, click, and tweak the sliders to see the physics in action.
+      </p>
+    </section>
+
+    <nav class="tabs" role="tablist" aria-label="Heat transfer modes">
+      <button class="tab active" role="tab" aria-selected="true" data-mode="conduction" id="tab-conduction">
+        <span class="tab-icon">●●●</span>
+        <span class="tab-label">Conduction</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="convection" id="tab-convection">
+        <span class="tab-icon">↻</span>
+        <span class="tab-label">Convection</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="radiation" id="tab-radiation">
+        <span class="tab-icon">〰</span>
+        <span class="tab-label">Radiation</span>
+      </button>
+      <div class="tab-indicator" id="tab-indicator"></div>
+    </nav>
+
+    <!-- CONDUCTION -->
+    <section class="panel glass active" id="panel-conduction" role="tabpanel" aria-labelledby="tab-conduction">
+      <div class="panel-grid">
+        <div class="explain">
+          <h2>Conduction</h2>
+          <p class="lead">
+            Energy passed atom-to-atom through a solid — no bulk motion of the material itself.
+          </p>
+          <p>
+            Imagine a metal rod. Atoms on the hot end vibrate hard and bump their neighbors.
+            Those neighbors bump the next ones, and so on — like a chain of people passing a
+            message. Heat creeps along the solid even though the atoms mostly stay in place.
+            Metals conduct well because their outer electrons move freely and carry energy fast;
+            wood and air conduct poorly (they are good <em>insulators</em>).
+          </p>
+          <ul class="tips">
+            <li><strong>Click or drag</strong> on the left side of the rod to dump extra heat.</li>
+            <li>Use the <strong>Hot-end temperature</strong> slider to change how fierce the source is.</li>
+            <li>Watch the glow and vibration travel from hot (left) to cold (right).</li>
+          </ul>
+        </div>
+        <div class="demo">
+          <div class="canvas-wrap">
+            <canvas id="canvas-conduction" width="640" height="360" aria-label="Conduction animation"></canvas>
+            <div class="canvas-labels">
+              <span class="hot-label">HOT</span>
+              <span class="cold-label">COLD</span>
+            </div>
+          </div>
+          <div class="controls">
+            <label class="ctrl">
+              <span>Hot-end temperature <em id="cond-temp-val">80%</em></span>
+              <input type="range" id="cond-temp" min="20" max="100" value="80" />
+            </label>
+            <label class="ctrl">
+              <span>Conductivity <em id="cond-k-val">High</em></span>
+              <input type="range" id="cond-k" min="1" max="10" value="7" />
+            </label>
+            <div class="ctrl-row">
+              <button type="button" class="btn" id="cond-reset">Reset rod</button>
+              <button type="button" class="btn btn-accent" id="cond-pulse">Pulse of heat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONVECTION -->
+    <section class="panel glass" id="panel-convection" role="tabpanel" aria-labelledby="tab-convection" hidden>
+      <div class="panel-grid">
+        <div class="explain">
+          <h2>Convection</h2>
+          <p class="lead">
+            Heat carried by the bulk motion of a fluid — warm fluid rises, cool fluid sinks.
+          </p>
+          <p>
+            Warm air or water expands, becomes less dense, and floats upward. Cooler fluid
+            is denser and sinks. That creates a looping current called a <strong>convection cell</strong>.
+            You feel it as a draft above a radiator, see it as soup swirling on the stove, and
+            live inside giant versions of it in weather and ocean currents.
+          </p>
+          <ul class="tips">
+            <li><strong>Click</strong> anywhere in the box to place or move a heat source.</li>
+            <li>Adjust <strong>heat strength</strong> and <strong>fluid viscosity</strong> to change the flow.</li>
+            <li>Warm (orange/red) blobs rise; cool (blue) blobs sink and close the loop.</li>
+          </ul>
+        </div>
+        <div class="demo">
+          <div class="canvas-wrap">
+            <canvas id="canvas-convection" width="640" height="360" aria-label="Convection animation"></canvas>
+            <div class="hint-float" id="conv-hint">Click to place heat source</div>
+          </div>
+          <div class="controls">
+            <label class="ctrl">
+              <span>Heat strength <em id="conv-heat-val">70%</em></span>
+              <input type="range" id="conv-heat" min="20" max="100" value="70" />
+            </label>
+            <label class="ctrl">
+              <span>Viscosity <em id="conv-visc-val">Medium</em></span>
+              <input type="range" id="conv-visc" min="1" max="10" value="4" />
+            </label>
+            <div class="ctrl-row">
+              <button type="button" class="btn" id="conv-reset">Reset fluid</button>
+              <button type="button" class="btn btn-accent" id="conv-toggle">Pause / resume</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RADIATION -->
+    <section class="panel glass" id="panel-radiation" role="tabpanel" aria-labelledby="tab-radiation" hidden>
+      <div class="panel-grid">
+        <div class="explain">
+          <h2>Radiation</h2>
+          <p class="lead">
+            Energy traveling as electromagnetic waves — no touching matter required.
+          </p>
+          <p>
+            Every warm object gives off infrared light (and hotter ones give off visible light too).
+            Those waves can cross a vacuum — that is how sunlight warms Earth across empty space.
+            Dark surfaces absorb radiation well; shiny or white surfaces reflect more of it.
+            A barrier in the path can block or absorb the waves.
+          </p>
+          <ul class="tips">
+            <li>Drag the <strong>source temperature</strong> slider — hotter means brighter, faster waves.</li>
+            <li>Toggle the <strong>blocker</strong> to put a shield in the path of the rays.</li>
+            <li>Notice: waves still travel through the empty (vacuum) region with no particles needed.</li>
+          </ul>
+        </div>
+        <div class="demo">
+          <div class="canvas-wrap">
+            <canvas id="canvas-radiation" width="640" height="360" aria-label="Radiation animation"></canvas>
+          </div>
+          <div class="controls">
+            <label class="ctrl">
+              <span>Source temperature <em id="rad-temp-val">Hot</em></span>
+              <input type="range" id="rad-temp" min="30" max="100" value="75" />
+            </label>
+            <label class="ctrl">
+              <span>Wave intensity <em id="rad-int-val">High</em></span>
+              <input type="range" id="rad-int" min="1" max="10" value="7" />
+            </label>
+            <div class="ctrl-row">
+              <button type="button" class="btn" id="rad-blocker" aria-pressed="false">Add blocker</button>
+              <button type="button" class="btn btn-accent" id="rad-pulse">Burst of rays</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer glass">
+      <p>
+        Sample educational demo · English · Vanilla HTML/CSS/JS · Open <code>index.html</code> in any modern browser.
+      </p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
